@@ -1,0 +1,419 @@
+/* =========================================
+    CSS STYLING & THEME (PIRATA)
+    ========================================= */
+:root {
+    /* Paleta de colores pirata */
+    --bg-ocean: #0a1118;         
+    --bg-wood-dark: #24150D;     
+    --bg-wood-light: #3A2318;    
+    --board-felt: #11222A;       
+    --gold: #D4AF37;             
+    --gold-hover: #F1C40F;       
+    --red-dark: #7A1A1A;         
+    --red-hover: #9E2222;
+    --text-light: #F5E6CC;       
+    --text-muted: #A89F91;
+    --card-bg: #FDF5E6;          
+    --card-text: #2B1D14;        
+    --border-wood: #140D09;
+    --border-radius: 6px;
+    --card-radius: 8px;          
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: var(--bg-ocean);
+    background-image: radial-gradient(circle at center, #16222E 0%, #0A1118 100%);
+    color: var(--text-light);
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    overflow: hidden;
+}
+
+/* --- CONTENEDOR CENTRAL (PILAR 1000px) --- */
+.game-wrapper {
+    width: 100%;
+    max-width: 1000px; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-wood-dark);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    border-left: 6px solid var(--border-wood);
+    border-right: 6px solid var(--border-wood);
+    position: relative;
+}
+
+/* --- Header & Notificaciones --- */
+header {
+    background-color: var(--bg-wood-light);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--border-wood);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.game-status {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px black;
+}
+
+.highlight {
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#notifications-container {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.notification {
+    background-color: rgba(36, 21, 13, 0.95);
+    color: var(--gold);
+    padding: 12px 25px;
+    border-radius: 4px;
+    border: 2px solid var(--gold);
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    animation: slideDown 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards;
+    font-weight: bold;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* --- Layout Principal --- */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* --- Sidebar (Jugadores) --- */
+.sidebar {
+    width: 240px;
+    background-color: var(--bg-wood-light);
+    border-right: 3px solid var(--border-wood);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 3px black;
+    text-align: center;
+    border-bottom: 2px dashed var(--text-muted);
+    padding-bottom: 10px;
+}
+
+.player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.player-card {
+    background-color: rgba(20, 13, 9, 0.6);
+    padding: 12px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid transparent;
+    border: 1px solid #4A3324;
+    transition: all 0.2s;
+}
+
+.player-card.active {
+    background-color: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #FFF;
+}
+
+.player-stats {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* --- Tablero de Juego --- */
+.game-board {
+    flex: 1;
+    background-color: var(--board-felt);
+    background-image: radial-gradient(circle, #1F3B4D 0%, #11222A 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+
+.center-play-area {
+    display: flex;
+    gap: 60px; 
+    margin-bottom: 30px;
+}
+
+.card-pile {
+    width: 120px;
+    height: 168px;
+    border-radius: var(--card-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    font-weight: bold;
+    position: relative;
+}
+
+.deck-pile {
+    background: repeating-linear-gradient(
+        45deg,
+        #3A2318,
+        #3A2318 10px,
+        #24150D 10px,
+        #24150D 20px
+    );
+    border: 3px solid var(--border-wood);
+    color: var(--text-light);
+}
+
+.discard-pile {
+    background-color: var(--card-bg);
+    color: var(--card-text);
+    border: 2px solid #8B6508;
+}
+
+.discard-pile.empty {
+    background-color: rgba(255,255,255,0.02);
+    border: 2px dashed rgba(212, 175, 55, 0.3);
+    box-shadow: none;
+    color: var(--text-muted);
+}
+
+.pile-label {
+    position: absolute;
+    bottom: -30px;
+    color: var(--text-light);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* --- Botones de Acción --- */
+.action-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; 
+    justify-content: center;
+    background: rgba(20, 13, 9, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid var(--border-wood);
+    max-width: 550px; 
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.action-btn {
+    width: 155px; 
+    height: 48px;
+    background-color: var(--red-dark);
+    color: var(--text-light);
+    border: 2px solid #4A0C0C;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 0 #3A0C0C;
+    text-shadow: 1px 1px 2px black;
+}
+
+.action-btn:hover {
+    background-color: var(--red-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #3A0C0C;
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #3A0C0C;
+}
+
+.action-btn.primary {
+    background-color: var(--gold);
+    color: var(--bg-wood-dark);
+    border-color: #A3821A;
+    box-shadow: 0 4px 0 #8B6508;
+    text-shadow: none;
+}
+
+.action-btn.primary:hover {
+    background-color: var(--gold-hover);
+    box-shadow: 0 6px 0 #8B6508;
+}
+
+.action-btn.primary:active {
+    box-shadow: 0 0 0 #8B6508;
+}
+
+/* --- Área de la Mano (Cartas) --- */
+.hand-area {
+    background-color: var(--bg-wood-light);
+    height: 280px; /* Aumentado ligeramente para acomodar la información extra */
+    border-top: 3px solid var(--border-wood);
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0 0 0; /* Solo padding superior */
+    z-index: 10;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+}
+
+.hand-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    text-shadow: 1px 1px 2px black;
+    pointer-events: none; /* Para que el texto no bloquee los clicks de las cartas si saltan */
+    z-index: 5;
+}
+
+.hand-cards {
+    display: flex;
+    /* Sin scroll, overflow visible para que no se corten por arriba */
+    overflow: visible; 
+    padding: 20px 20px 30px 20px; /* Balance perfecto: espacio para saltar y despegadas del fondo */
+    flex: 1;
+    align-items: flex-end; 
+    justify-content: center;
+    width: 100%;
+}
+
+.card {
+    width: 130px;
+    height: 182px;
+    /* Solución 1: flex-shrink 0 asegura que la carta no reduzca su tamaño real */
+    flex-shrink: 0; 
+    background-color: var(--card-bg);
+    border-radius: var(--card-radius);
+    box-shadow: -5px 5px 12px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    cursor: pointer;
+    /* Transición suave para todos los movimientos */
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s;
+    position: relative;
+    color: var(--card-text);
+    border: 2px solid #C4A482;
+    /* El margen negativo se aplicará dinámicamente vía JS */
+}
+
+/* Solución 3: Hover que sube y va levemente a la izquierda, 
+    pero sin alterar el z-index, para que siga cubierta por la derecha */
+.card:hover {
+    transform: translate(-10px, -30px);
+    box-shadow: -10px 20px 25px rgba(0,0,0,0.8);
+    border-color: var(--gold);
+}
+
+.card.selected {
+    transform: translateY(-20px);
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+.card.selected:hover {
+    transform: translate(-10px, -30px);
+}
+
+/* Elementos internos de la carta pirata */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(139, 101, 8, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+.card-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #E6D0AB;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-family: inherit;
+}
+
+.card-type {
+    font-size: 0.7rem;
+    color: #725C42;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.card-value {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--gold);
+    color: var(--bg-wood-dark);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--bg-wood-dark);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploración!</title>
+    <link rel="icon" href="icon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         HTML STRUCTURE
+         ========================================= -->
+    <div class="game-wrapper">
+        
+        <div id="notifications-container"></div>
+
+        <header>
+            <div class="game-status">
+                Ronda: <span id="current-round-display" class="highlight">Cargando...</span> |
+                Turno Actual: <span id="current-turn-display" class="highlight">Cargando...</span>
+            </div>
+            <div class="game-status">
+                Taberna: #4092
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- sidebar -->
+            <aside class="sidebar">
+                <h2>Piratas</h2>
+                <div id="players-container" class="player-list"></div>
+            </aside>
+
+            <!-- centro -->
+            <main class="game-board">
+                <div class="center-play-area">
+                    <div class="card-pile deck-pile" id="deck-element">
+                        <span style="font-size: 2.5rem; color: #D4AF37; text-shadow: 2px 2px 4px black;">☠️</span>
+                        <div style="margin-top: 5px;"><span id="deck-count">0</span> cartas</div>
+                        <div class="pile-label">Mazo</div>
+                    </div>
+                    <div class="card-pile discard-pile empty" id="discard-element">
+                        <div id="discard-content">Vacío</div>
+                        <div class="pile-label">Descarte</div>
+                    </div>
+                </div>
+
+                <div class="action-bar" id="action-buttons">
+                    <button class="action-btn" data-action="explore">Explorar</button>
+                    <button class="action-btn" data-action="trick">Embaucar</button>
+                    <button class="action-btn" data-action="buy">Comprar Descarte</button>
+                    <button class="action-btn" data-action="sell">Vender Botín</button>
+                    <button class="action-btn" data-action="dig">Excavar</button>
+                    <button class="action-btn primary" data-action="pass">Pasar Turno</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- zona de la mano -->
+        <footer class="hand-area">
+            <div class="hand-header">
+                <span id="my-card-count">Cartas en mano: <strong class="highlight">0</strong></span>
+                <span>Tus Doblones: <strong class="highlight" id="my-coins">0</strong> 🟡</span>
+            </div>
+            <div class="hand-cards" id="hand-container">
+                <!-- mano inyectada por JS -->
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
