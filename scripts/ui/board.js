@@ -1,7 +1,7 @@
 import { elements } from '../state.js';
 
 export function updateBoard(state) {
-    elements.deckCount.textContent = state.deckRemaining;
+    elements.deckCount.textContent = state.deck.currentDeck.length;
     const me = state.players.find(p => p.id === state.myPlayerId);
     if (me) elements.myCoins.textContent = me.coins;
 

@@ -13,7 +13,7 @@ export function updatePlayers(state) {
         playerDiv.innerHTML = `
             <div class="player-name">${player.name} ${isMe ? '(Tú)' : ''}</div>
             <div class="player-stats">
-                <span>🃏 ${player.cardCount}</span>
+                <span>🃏 ${player.hand.length}</span>
                 <span>🟡 ${player.coins}</span>
             </div>
         `;

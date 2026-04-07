@@ -1,5 +1,7 @@
 import { showNotification } from '../ui/notif.js';
 import { elements, gameState, selectedCards, renderGameState } from '../state.js';
+import { explore } from './explore.js';
+
 
 export function initActionEvents() {
     elements.actionButtons.addEventListener('click', (e) => {
@@ -16,10 +18,7 @@ function handleAction(action) {
 
     const actionsMap = {
         'explore': () => {
-            showNotification("Acción: Explorando el océano...");
-            gameState.deckRemaining -= 1;
-            gameState.myHand.push({ id: `c${Date.now()}`, name: "Cofre Misterioso", type: "desconocido", value: 0 });
-            renderGameState(gameState);
+            explore();
         },
         'trick': () => {
             if (selectedCards.size === 0) return showNotification("¡Selecciona una carta para Embaucar!");
