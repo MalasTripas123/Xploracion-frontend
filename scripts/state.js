@@ -12,7 +12,7 @@ export let gameState = {
         specialDeck: [],
         currentDeck: [],
     },
-    discard: [{ id: "c100", name: "Cáliz Antiguo", type: "artefacto", value: 15 }],
+    discard: [],
     players: [
         { id: "p1", name: "Player 1", hand: [], coins: 10 },
         { id: "p2", name: "Player 2", hand: [], coins: 10 },
@@ -29,6 +29,7 @@ export const elements = {
     currentTurn: document.getElementById('current-turn-display'),
     playersContainer: document.getElementById('players-container'),
     deckCount: document.getElementById('deck-count'),
+    discardCount: document.getElementById('discard-count'),
     discardElement: document.getElementById('discard-element'),
     discardContent: document.getElementById('discard-content'),
     myCoins: document.getElementById('my-coins'),

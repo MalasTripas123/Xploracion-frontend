@@ -1,6 +1,7 @@
 import { showNotification } from '../ui/notif.js';
 import { elements, gameState, selectedCards, renderGameState } from '../state.js';
 import { explore } from './explore.js';
+import { buy } from './buy.js';
 
 
 export function initActionEvents() {
@@ -25,11 +26,7 @@ function handleAction(action) {
             showNotification(`Acción: Embaucar jugado con ${selectedCards.size} cartas.`);
         },
         'buy': () => {
-            if (!gameState.discardTopCard) return showNotification("¡El descarte está vacío!");
-            showNotification("Acción: Compraste botín del descarte.");
-            gameState.myHand.push(gameState.discardTopCard);
-            gameState.discardTopCard = null;
-            renderGameState(gameState);
+            buy();
         },
         'sell': () => {
             if (selectedCards.size === 0) return showNotification("¡Selecciona botín para vender!");

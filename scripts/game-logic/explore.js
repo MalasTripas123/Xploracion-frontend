@@ -1,16 +1,18 @@
 import { showNotification } from '../ui/notif.js';
 import { gameState, renderGameState } from '../state.js';
 import { draw } from './basic-actions.js';
+import { parceCard } from './parce-card.js';
 
 export function explore() {
     const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayerId);
     // retorna si el jugador no tiene dinero
-    if (currentPlayer.coins < 1) {
-        showNotification("Monedas insuficientes!");
-        return;
-    }
+    if (currentPlayer.coins < 1) return showNotification("Monedas insuficientes!");
+
     const drawnCard = draw(1, currentPlayer);
     currentPlayer.coins -= 1;
-    showNotification(`Exploraste y encontraste: ${drawnCard[0].name} ${drawnCard[0].pieces != null && drawnCard[0].pieces.length ? '(' + drawnCard[0].pieces.map(p => '[' + p + ']').join('') + ')' : ''}`);
+
+    //TODO si encuentras un bandido ocurre un asalto
+
+    showNotification(`Exploraste y encontraste: ${parceCard(drawnCard[0])}`);
     renderGameState(gameState);
 }
