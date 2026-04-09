@@ -229,6 +229,9 @@ header {
     box-shadow: none;
     color: var(--text-muted);
 }
+.discard-pile.alert {
+    border: 10px solid #D4AF37;
+}
 
 .pile-label {
     position: absolute;
@@ -400,13 +403,31 @@ header {
     pointer-events: none;
 }
 
-.card-title {
+.card-symbol {
     font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #E6D0AB;
+    /* padding: 5px; */
+    /* margin-bottom: 5px; */
+    font-family: inherit;
+    background-color: #E6D0AB;
+    min-width: 23px;
+    height: 23px;
+}
+.card-title {
+    /* line-height: 1.1em; */
+    display: flex;
+  align-items: center; /* Centrado vertical */
+  justify-content: center;
+    min-height: 2.6em;
+    font-size: 0.85rem;
     font-weight: bold;
     text-align: center;
     border-bottom: 2px solid #E6D0AB;
     padding-bottom: 5px;
     margin-bottom: 5px;
+    margin-left: 5px;
     font-family: inherit;
 }
 
@@ -417,11 +438,20 @@ header {
     text-transform: uppercase;
     font-weight: bold;
 }
+.card-pieces {
+    font-size: 0.7rem;
+    max-width: 40px;
+    color: #725C42;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
 .card-id {
     position: absolute;
     bottom: 10px;
-    left: 10px;
+    left: 45px;
     font-size: 0.7rem;
     color: #725C42;
     text-align: center;
@@ -431,8 +461,8 @@ header {
 
 .card-value {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 8px;
+    left: 10px;
     background: var(--gold);
     color: var(--bg-wood-dark);
     width: 28px;
