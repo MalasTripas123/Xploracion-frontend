@@ -10,10 +10,13 @@ export function mill(ammount) {
 }
 // barajar [mano => baraja]
 // descartar [mano => descarte]
+export function discard(ammount, player) {
+    return moveCards(player.hand, gameState.discard, ammount, true);
+}
 // reintegrar [descarte => baraja]
 // devolver [descarte => mano]
 export function getback(ammount, player) {
-    return moveCards(gameState.discard, player.hand, ammount);
+    return moveCards(gameState.discard, player.hand, ammount, true);
 }
 
 // desvanecer [baraja => void]
@@ -21,8 +24,9 @@ export function getback(ammount, player) {
 // exiliar [descarte = void]
 
 // mover X cartas de origin a destiny
-export function moveCards(origin, destiny, ammount) {
-    const movedCards = origin.splice(0, ammount).map(card => structuredClone(card));
+export function moveCards(origin, destiny, ammount, takeFromEnd=false) {
+    let init = takeFromEnd? origin.length-ammount : 0 ;
+    const movedCards = origin.splice(init, ammount).map(card => structuredClone(card));
     destiny.push(...movedCards);
     return movedCards;
 }

@@ -298,6 +298,24 @@ header {
     box-shadow: 0 0 0 #8B6508;
 }
 
+.blocked-btn {
+    width: 155px; 
+    height: 48px;
+    border: 2px solid #271b6d;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor:not-allowed;
+    transition: all 0.2s ease;
+    text-shadow: 1px 1px 2px black;
+    background-color:#1F3B4D;
+    color:#A89F91;
+    border-color: #1b1b1f;
+    box-shadow: 0 4px 0 #000000;
+    text-shadow: none;
+}
+
 /* --- Área de la Mano (Cartas) --- */
 .hand-area {
     background-color: var(--bg-wood-light);
@@ -393,6 +411,17 @@ header {
 }
 
 .card-type {
+    font-size: 0.7rem;
+    color: #725C42;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.card-id {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     font-size: 0.7rem;
     color: #725C42;
     text-align: center;

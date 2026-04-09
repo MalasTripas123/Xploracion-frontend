@@ -1,7 +1,3 @@
-import { updatePlayers } from './ui/player.js';
-import { updateBoard } from './ui/board.js';
-import { updateHand } from './ui/hand.js';
-
 export let gameState = {
     currentRound: 0,
     turn: 0,
@@ -19,6 +15,7 @@ export let gameState = {
         { id: "p3", name: "Player 3", hand: [], coins: 10 },
         { id: "p4", name: "Player 4", hand: [], coins: 10 },
     ],
+    turnState: 'initial', // initial: permite todas las acciones - explored: bloquea la excavación - paused: bloquea todas las acciones
 };
 
 export let selectedCards = new Set();
@@ -37,10 +34,3 @@ export const elements = {
     notifications: document.getElementById('notifications-container'),
     actionButtons: document.getElementById('action-buttons')
 };
-
-export function renderGameState(state) {
-    elements.currentRound.textContent = state.currentRound;
-    updatePlayers(state);
-    updateBoard(state);
-    updateHand(state.players.find(p => p.id === state.currentPlayerId).hand);
-}

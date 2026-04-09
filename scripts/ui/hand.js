@@ -49,6 +49,7 @@ export function updateHand(cards) {
             <div class="card-title">${card.name}</div>
             <div class="card-type">${card.type}</div>
             <div class="card-value">${card.price}</div>
+            <div class="card-id">ID: ${card.id}</div>
         `;
 
         cardEl.addEventListener('click', () => handleCardClick(card.id, cardEl));
