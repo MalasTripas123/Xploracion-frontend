@@ -1,7 +1,6 @@
 export let gameState = {
     currentRound: 0,
     turn: 0,
-    currentPlayerId: "p1",
     myPlayerId: "p1",
     deck: {
         basicDeck: [],

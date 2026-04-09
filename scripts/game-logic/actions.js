@@ -3,6 +3,7 @@ import { elements, gameState, selectedCards } from '../state.js';
 import { renderGameState } from '../ui.js';
 import { explore } from './explore.js';
 import { buy } from './buy.js';
+import { dig } from './dig.js';
 
 
 export function initActionEvents() {
@@ -14,7 +15,7 @@ export function initActionEvents() {
 }
 
 function handleAction(action) {
-    if (gameState.currentPlayerId !== gameState.myPlayerId) {
+    if (gameState.players[gameState.turn].id !== gameState.myPlayerId) {
         return showNotification("¡No es tu turno, grumete!");
     }
 
@@ -43,8 +44,7 @@ function handleAction(action) {
         },
         'dig': () => {
             if (gameState.turnState === 'paused' || gameState.turnState === 'explored') return;
-
-            showNotification("Acción: Excavar ejecutada. ¡Busca el tesoro!");
+            dig();
         },
         'pass': () => {
             if (gameState.turnState === 'paused') return;

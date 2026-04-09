@@ -3,7 +3,7 @@ import { elements } from '../state.js';
 export function updatePlayers(state) {
     elements.playersContainer.innerHTML = ''; 
     state.players.forEach(player => {
-        const isActive = player.id === state.currentPlayerId;
+        const isActive = state.players[state.turn].id === player.id;
         const isMe = player.id === state.myPlayerId;
         const playerDiv = document.createElement('div');
         playerDiv.className = `player-card ${isActive ? 'active' : ''}`;

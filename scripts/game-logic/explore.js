@@ -5,7 +5,7 @@ import { draw } from './basic-actions.js';
 import { parceCard } from './parce-card.js';
 
 export function explore() {
-    const currentPlayer = gameState.players.find(p => p.id === gameState.currentPlayerId);
+    const currentPlayer = gameState.players[gameState.turn];
     // retorna si el jugador no tiene dinero
     if (currentPlayer.coins < 1) return showNotification("Monedas insuficientes!");
 

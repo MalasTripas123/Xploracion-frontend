@@ -1,21 +1,38 @@
 import { gameState } from '../state.js';
 
+// REGLAS GENERALES:
+// Al sacar cartas de la baraja, se sacan del PRINCIPIO
+// Al sacar cartas del descarte, se sacan del FINAL
+// Al sacar cartas de la mano, se deben ELEGIR
+
 // robar [baraja => mano]
 export function draw(ammount, player) {
     return moveCards(gameState.deck.currentDeck, player.hand, ammount);
 }
+
 // moler [baraja => descarte]
 export function mill(ammount) {
     return moveCards(gameState.deck.currentDeck, gameState.discard, ammount);
 }
-// barajar [mano => baraja]
-// descartar [mano => descarte]
-export function discard(ammount, player) {
-    return moveCards(player.hand, gameState.discard, ammount, true);
+
+// colocar [mano => baraja] //! desde la mano debería elegirse qué carta sacar
+export function place() {
+    //TODO
 }
-// reintegrar [descarte => baraja]
-// devolver [descarte => mano]
-export function getback(ammount, player) {
+
+// descartar [mano => descarte] //! desde la mano debería elegirse qué carta sacar
+export function discard(ammount, player) {
+    //TODO descartar una carta a elección
+    return moveCards(player.hand, gameState.discard, ammount, true); // con esto descarta la ÚLTIMA carta puesta en la mano
+}
+
+// reciclar [descarte => baraja]
+export function recycle() {
+    //TODO
+}
+
+// restaurar [descarte => mano]
+export function restore(ammount, player) {
     return moveCards(gameState.discard, player.hand, ammount, true);
 }
 
@@ -25,8 +42,7 @@ export function getback(ammount, player) {
 
 // mover X cartas de origin a destiny
 export function moveCards(origin, destiny, ammount, takeFromEnd=false) {
-    let init = takeFromEnd? origin.length-ammount : 0 ;
-    const movedCards = origin.splice(init, ammount).map(card => structuredClone(card));
+    const movedCards = origin.splice(takeFromEnd? origin.length-ammount : 0, ammount).map(card => structuredClone(card));
     destiny.push(...movedCards);
     return movedCards;
 }

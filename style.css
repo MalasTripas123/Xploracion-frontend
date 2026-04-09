@@ -259,6 +259,10 @@ header {
 }
 
 .action-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 155px; 
     height: 48px;
     background-color: var(--red-dark);
@@ -303,6 +307,10 @@ header {
 }
 
 .blocked-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 155px; 
     height: 48px;
     border: 2px solid #271b6d;
@@ -318,6 +326,25 @@ header {
     border-color: #1b1b1f;
     box-shadow: 0 4px 0 #000000;
     text-shadow: none;
+}
+
+.action-value {
+    /* position: absolute; */
+    /* bottom: 8px;
+    left: 10px; */
+    margin-left: 10px;
+    background: var(--gold);
+    color: var(--bg-wood-dark);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--bg-wood-dark);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
 /* --- Área de la Mano (Cartas) --- */
@@ -405,12 +432,14 @@ header {
 }
 
 .card-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-size: 0.95rem;
     font-weight: bold;
     text-align: center;
     border-bottom: 2px solid #E6D0AB;
-    /* padding: 5px; */
-    /* margin-bottom: 5px; */
     font-family: inherit;
     background-color: #E6D0AB;
     min-width: 23px;
@@ -419,8 +448,8 @@ header {
 .card-title {
     /* line-height: 1.1em; */
     display: flex;
-  align-items: center; /* Centrado vertical */
-  justify-content: center;
+    align-items: center; /* Centrado vertical */
+    justify-content: center;
     min-height: 2.6em;
     font-size: 0.85rem;
     font-weight: bold;
