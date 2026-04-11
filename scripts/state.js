@@ -30,6 +30,7 @@ export const elements = {
     discardContent: document.getElementById('discard-content'),
     myCoins: document.getElementById('my-coins'),
     handContainer: document.getElementById('hand-container'),
+    piecesCountContainer: document.getElementById('hand-header-pieces-count'),
     notifications: document.getElementById('notifications-container'),
     actionButtons: document.getElementById('action-buttons')
 };

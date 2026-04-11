@@ -9,7 +9,7 @@ import { mill } from './game-logic/basic-actions.js';
 window.addEventListener('DOMContentLoaded', () => {
     initGame();
     millALot(); //! borrar después
-    addToHand(); //! borrar después
+    // addToHand(); //! borrar después
     renderGameState(gameState);
     initActionEvents();
     setTimeout(() => showNotification("¡La partida comienza! Eres Barbanegra."), 500);
@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Evento crítico para recalcular los márgenes de las cartas si el usuario redimensiona la ventana
 window.addEventListener('resize', () => {
-    updateHand(gameState.players.find(p => p.id === gameState.currentPlayerId).hand);
+    updateHand(gameState.players[gameState.turn].hand);
 });
 
 //! funciones de debug

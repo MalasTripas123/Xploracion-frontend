@@ -60,6 +60,18 @@ export function updateHand(cards) {
         cardEl.addEventListener('click', () => handleCardClick(card.id, cardEl));
         elements.handContainer.appendChild(cardEl);
     });
+
+    // marcar trozos obtenidos:
+    const activePieces = [];
+    cards.forEach(card => {
+        if (card.pieces === null) return;
+        card.pieces.forEach(piece => {
+            if (!activePieces.includes(piece)) activePieces.push(piece);
+        });
+    });
+    elements.piecesCountContainer.innerHTML = 'Tozos de mapa obtenidos:' + ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(piece => `
+        <div class="owned-piece ${activePieces.includes(piece) ? 'active' : ''}">${piece}</div>`
+    ).join('');
 }
 
 function handleCardClick(cardId, element) {

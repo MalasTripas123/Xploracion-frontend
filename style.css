@@ -354,22 +354,70 @@ header {
     border-top: 3px solid var(--border-wood);
     display: flex;
     flex-direction: column;
-    padding: 15px 0 0 0; /* Solo padding superior */
+    padding: 15px 0 0 0;
     z-index: 10;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
 }
 
 .hand-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 5px;
-    padding: 0 20px;
-    font-size: 1.1rem;
+
+    
+    font-size: 1rem;
     color: var(--text-light);
     text-shadow: 1px 1px 2px black;
     pointer-events: none; /* Para que el texto no bloquee los clicks de las cartas si saltan */
-    z-index: 5;
+    z-index: 10;
+}
+
+.hand-header-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 20px;
+    gap: 20px;
+    font-size: 1rem;
+    color: var(--text-light);
+    text-shadow: 1px 1px 2px black;
+    pointer-events: none; /* Para que el texto no bloquee los clicks de las cartas si saltan */
+    z-index: 10;
+}
+
+.hand-header-pieces-count {
+    position: absolute;
+    right: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 1rem;
+    color: var(--text-light);
+    text-shadow: 1px 1px 2px black;
+    pointer-events: none; /* Para que el texto no bloquee los clicks de las cartas si saltan */
+    z-index: 10;
+}
+
+
+
+.owned-piece {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #292929;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: inherit;
+    background-color: #E6D0AB;
+    min-width: 23px;
+    height: 23px;
+}
+
+.owned-piece.active {
+    color: #dbdbdb;
+    background-color: var(--gold);
 }
 
 .hand-cards {
@@ -439,7 +487,6 @@ header {
     font-size: 0.95rem;
     font-weight: bold;
     text-align: center;
-    border-bottom: 2px solid #E6D0AB;
     font-family: inherit;
     background-color: #E6D0AB;
     min-width: 23px;
