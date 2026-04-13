@@ -4,6 +4,9 @@ import { renderGameState } from '../ui.js';
 import { explore } from './explore.js';
 import { buy } from './buy.js';
 import { dig } from './dig.js';
+import { sell } from './sell.js';
+import { passTurn, autoPassTurn } from './turn.js';
+import { trick } from './trick.js';
 
 
 export function initActionEvents() {
@@ -15,9 +18,9 @@ export function initActionEvents() {
 }
 
 function handleAction(action) {
-    if (gameState.players[gameState.turn].id !== gameState.myPlayerId) {
-        return showNotification("¡No es tu turno, grumete!");
-    }
+    // if (gameState.players[gameState.turn].id !== gameState.myPlayerId) {
+    //     return showNotification("¡No es tu turno, grumete!");
+    // }
 
     const actionsMap = {
         'explore': () => {
@@ -26,32 +29,26 @@ function handleAction(action) {
         },
         'trick': () => {
             if (gameState.turnState === 'paused') return;
-
-            if (selectedCards.size === 0) return showNotification("¡Selecciona una carta para Embaucar!");
-            showNotification(`Acción: Embaucar jugado con ${selectedCards.size} cartas.`);
+            trick();
+            // if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'buy': () => {
             if (gameState.turnState === 'paused') return;
             buy();
+            if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'sell': () => {
             if (gameState.turnState === 'paused') return;
-
-            if (selectedCards.size === 0) return showNotification("¡Selecciona botín para vender!");
-            showNotification(`Acción: Vendiste ${selectedCards.size} cartas por doblones.`);
-            gameState.myHand = gameState.myHand.filter(c => !selectedCards.has(c.id));
-            renderGameState(gameState);
+            sell();
+            if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'dig': () => {
             if (gameState.turnState === 'paused' || gameState.turnState === 'explored') return;
             dig();
+            if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'pass': () => {
-            if (gameState.turnState === 'paused') return;
-
-            showNotification("Acción: Pasas el turno.");
-            gameState.currentPlayerId = "p2";
-            renderGameState(gameState);
+            passTurn();
         }
     };
 

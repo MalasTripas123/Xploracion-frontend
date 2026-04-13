@@ -1,9 +1,11 @@
-import { elements, selectedCards } from '../state.js';
+import { elements, selectedCards, gameState } from '../state.js';
 import { getPiecesParced } from '../game-logic/parce-card.js';
+import { toggleButtons } from '../ui.js';
 
 export function updateHand(cards) {
     elements.handContainer.innerHTML = ''; 
     elements.myCardCount.innerHTML = `Cartas en mano: <strong class="highlight">${cards.length}</strong>`;
+    elements.myCoins.textContent = gameState.players[gameState.turn].coins;
     
     const previousSelection = new Set(selectedCards);
     selectedCards.clear();
@@ -57,7 +59,7 @@ export function updateHand(cards) {
             <div class="card-id">ID: ${card.id}</div>
         `;
 
-        cardEl.addEventListener('click', () => handleCardClick(card.id, cardEl));
+        cardEl.addEventListener('click', () => handleCardClick(card, cardEl, elements.handContainer));
         elements.handContainer.appendChild(cardEl);
     });
 
@@ -74,12 +76,98 @@ export function updateHand(cards) {
     ).join('');
 }
 
-function handleCardClick(cardId, element) {
-    if (selectedCards.has(cardId)) {
-        selectedCards.delete(cardId);
+function handleCardClick(card, element, cardsInDOM) {
+    // 1. Si la carta clickeada ya estaba seleccionada, la deseleccionamos y salimos.
+    if (selectedCards.has(card)) {
+        selectedCards.delete(card);
         element.classList.remove('selected');
-    } else {
-        selectedCards.add(cardId);
-        element.classList.add('selected');
+        toggleButtons();
+        return;
     }
+
+    // Evitamos convertir el Set a Array múltiples veces por rendimiento
+    const firstSelected = Array.from(selectedCards)[0];
+
+    // 2. Si hay al menos una carta seleccionada, pero la primera O la nueva NO son 'PISTA', reseteamos todo.
+    if (selectedCards.size > 0 && (firstSelected.type !== 'PISTA' || card.type !== 'PISTA')) {
+        selectedCards.clear();
+        // Optimización sugerida: buscar solo los divs que tengan la clase 'selected'
+        cardsInDOM.querySelectorAll("div.selected").forEach(child => {
+            child.classList.remove('selected');
+        });
+    } 
+    // 3. Si ya hay 2 cartas seleccionadas (y ambas son PISTA por la validación anterior), 
+    // deseleccionamos la más antigua para hacerle espacio a la nueva.
+    else if (selectedCards.size === 2) {
+        document.querySelector(`[data-id="${firstSelected.id}"]`).classList.remove('selected');
+        selectedCards.delete(firstSelected);
+    }
+
+    // 4. ACCIÓN COMÚN: Se ejecuta para el primer click, después de un reseteo (paso 2), 
+    // cuando solo había 1 pista, o tras quitar la pista antigua (paso 3).
+    selectedCards.add(card);
+    element.classList.add('selected');
+    toggleButtons();
 }
+
+// función que hice toda mierda y apurada
+// function handleCardClick(card, element, cardsInDOM) {
+//     // card: carta (como objeto) en la que se hace click
+//     // element: carta en el DOM en la que se hace click
+
+//     if (selectedCards.size < 1) {
+//         console.log('NO habían cartas seleccionadas');
+//         selectedCards.add(card);
+//         element.classList.add('selected');
+//         toggleButtons();
+//         return;
+//     }
+
+//     if (selectedCards.has(card)) {
+//         console.log('la carta clickeadad es la misma que la seleccionaa');
+//         selectedCards.delete(card);
+//         element.classList.remove('selected');
+//         toggleButtons();
+//         return;
+//     }
+
+//     if (Array.from(selectedCards)[0].type !== 'PISTA') {
+//         console.log('NO había una pista seleccionada');
+//         selectedCards.clear();
+//         cardsInDOM.querySelectorAll("div").forEach(child => {
+//             child.classList.remove('selected');
+//         });
+//         selectedCards.add(card);
+//         element.classList.add('selected');
+//         toggleButtons();
+//         return;
+//     }
+
+//     if (card.type !== 'PISTA') {
+//         console.log('la carta clickeada NO es pista');
+//         selectedCards.clear();
+//         cardsInDOM.querySelectorAll("div").forEach(child => {
+//             child.classList.remove('selected');
+//         });
+//         selectedCards.add(card);
+//         element.classList.add('selected');
+//         toggleButtons();
+//         return;
+//     }
+
+//     if (selectedCards.size < 2) {
+//         console.log('hay MENOS de dos cartas seleccionadas');
+//         selectedCards.add(card);
+//         element.classList.add('selected');
+//         toggleButtons();
+//         return;
+//     }
+
+//     console.log('se deselecciona la primera pista seleccionada');
+//     document.querySelector(`[data-id="${Array.from(selectedCards)[0].id}"]`).classList.remove('selected');
+//     selectedCards.delete(Array.from(selectedCards)[0]);
+//     selectedCards.add(card);
+//     element.classList.add('selected');
+//     toggleButtons();
+//     return;
+// }

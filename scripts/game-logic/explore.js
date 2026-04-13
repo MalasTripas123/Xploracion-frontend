@@ -17,15 +17,21 @@ export function explore() {
         gameState.players[gameState.turn].hand.splice(gameState.players[gameState.turn].hand.length-1, 1);
         elements.discardElement.classList.remove('empty');
         elements.discardElement.classList.add('alert');
+
+        if (drawnCard[0].type === 'BANDIDO') {
+            //TODO si encuentras un bandido ocurre un asalto
+        } else {
+            
+        }
+
         setTimeout(() => {
             // elements.discardElement.classList.add('empty');
             elements.discardElement.classList.remove('alert');
         }, 500);
     }
-    if (drawnCard[0].type === 'BANDIDO') {
-        //TODO si encuentras un bandido ocurre un asalto
-    }
+    
 
+    showNotification(`Ese tesoro no se va a encontrar solo.`);
     showNotification(`Exploraste y encontraste: ${parceCard(drawnCard[0])}`);
     gameState.turnState = 'explored';
     renderGameState(gameState);

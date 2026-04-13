@@ -21,7 +21,7 @@ export function place() {
 }
 
 // descartar [mano => descarte] //! desde la mano debería elegirse qué carta sacar
-export function discard(ammount, player) {
+export function discard(ammount, player, cards) {
     //TODO descartar una carta a elección
     return moveCards(player.hand, gameState.discard, ammount, true); // con esto descarta la ÚLTIMA carta puesta en la mano
 }

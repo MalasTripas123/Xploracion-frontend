@@ -1,4 +1,4 @@
-import { gameState } from "../state.js";
+import { gameState, elements } from "../state.js";
 
 let cardId = 0;
 
@@ -153,4 +153,16 @@ export function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+export function shuffleAll() {
+    gameState.deck.currentDeck.push(...gameState.soldClues);
+    gameState.deck.currentDeck.push(...gameState.discard);
+    
+    gameState.soldClues = [];
+    gameState.discard = [];
+
+    elements.discardElement.classList.add('empty');
+
+    shuffle(gameState.deck.currentDeck);
 }

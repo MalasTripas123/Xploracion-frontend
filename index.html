@@ -15,11 +15,13 @@
     <div class="game-wrapper">
         
         <div id="notifications-container"></div>
+        <div id="trick-player-selector-container"></div>
 
         <header>
             <div class="game-status">
                 Ronda: <span id="current-round-display" class="highlight">Cargando...</span> |
-                Turno Actual: <span id="current-turn-display" class="highlight">Cargando...</span>
+                Turno Actual: <span id="current-turn-display" class="highlight">Cargando...</span> |
+                Jugador Activo: <span id="current-player-display" class="highlight">Cargando...</span>
             </div>
             <div class="game-status">
                 Taberna: #4092
@@ -42,17 +44,18 @@
                         <div class="pile-label">Mazo</div>
                     </div>
                     <div class="card-pile discard-pile empty" id="discard-element">
+                        <div id="clue-counter" class="pile-label" style="top: -30px;">Pistas: 0</div>
                         <div id="discard-content">Vacío</div>
                         <div style="margin-top: 5px;"><span id="discard-count">0</span> cartas</div>
-                        <div class="pile-label">Descarte</div>
+                        <div class="pile-label">Tienda</div>
                     </div>
                 </div>
 
                 <div class="action-bar" id="action-buttons">
                     <button class="action-btn" data-action="explore">Explorar</button>
                     <button class="action-btn" data-action="trick">Embaucar</button>
-                    <button class="action-btn" data-action="buy">Comprar Descarte</button>
-                    <button class="action-btn" data-action="sell">Vender Botín</button>
+                    <button class="action-btn" data-action="buy">Comprar</button>
+                    <button class="action-btn" data-action="sell">Vender</button>
                     <button class="action-btn" data-action="dig">Excavar</button>
                     <button class="action-btn primary" data-action="pass">Pasar Turno</button>
                 </div>

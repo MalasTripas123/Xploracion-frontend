@@ -8,7 +8,7 @@ import { mill } from './game-logic/basic-actions.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     initGame();
-    millALot(); //! borrar después
+    // millALot(); //! borrar después
     // addToHand(); //! borrar después
     renderGameState(gameState);
     initActionEvents();
@@ -24,7 +24,6 @@ window.addEventListener('resize', () => {
 function millALot(howMany = 10){
     mill(howMany);
 }
-
 function addToHand() {
     gameState.players[gameState.turn].hand.push({
         id: 999,

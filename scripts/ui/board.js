@@ -4,8 +4,6 @@ import { getPiecesParced } from '../game-logic/parce-card.js';
 export function updateBoard(state) {
     elements.deckCount.textContent = state.deck.currentDeck.length;
     elements.discardCount.textContent = state.discard.length;
-    const me = state.players.find(p => p.id === state.myPlayerId);
-    if (me) elements.myCoins.textContent = me.coins;
 
     if (state.discard.length > 0) {
         elements.discardElement.classList.remove('empty');

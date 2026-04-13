@@ -9,10 +9,11 @@ export function dig() {
     // retorna si el jugador no tiene dinero
     if (currentPlayer.coins < 2) return showNotification("Monedas insuficientes!");
 
-    draw(1, currentPlayer);
+    const drawnCard = draw(1, currentPlayer);
     currentPlayer.coins -= 2;
 
-    showNotification("Acción: Excavar ejecutada. ¡Busca el tesoro!");
+    showNotification(`Agarraste la pala y deciiste trabajar, literalmente.`);
+    showNotification(`Excavaste y encontraste: ${parceCard(drawnCard[0])}`);
     gameState.turnState = 'paused';
     renderGameState(gameState);
 }

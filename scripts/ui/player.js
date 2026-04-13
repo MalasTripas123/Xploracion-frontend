@@ -8,7 +8,7 @@ export function updatePlayers(state) {
         const playerDiv = document.createElement('div');
         playerDiv.className = `player-card ${isActive ? 'active' : ''}`;
         
-        if (isActive) elements.currentTurn.textContent = isMe ? "Tu Turno" : player.name;
+        // if (isActive) elements.currentTurn.textContent = isMe ? "Tu Turno" : player.name;
 
         playerDiv.innerHTML = `
             <div class="player-name">${player.name} ${isMe ? '(Tú)' : ''}</div>
