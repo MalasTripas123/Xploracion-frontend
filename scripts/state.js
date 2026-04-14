@@ -30,6 +30,7 @@ export const elements = {
     handContainer: document.getElementById('hand-container'),
     piecesCountContainer: document.getElementById('hand-header-pieces-count'),
     notifications: document.getElementById('notifications-container'),
+    bigNotifications: document.getElementById('big-notifications-container'),
     actionButtons: document.getElementById('action-buttons'),
     trickPlayerSelectorContainer: document.getElementById('trick-player-selector-container'),
 };

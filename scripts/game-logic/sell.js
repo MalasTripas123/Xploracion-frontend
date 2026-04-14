@@ -13,6 +13,7 @@ export function sell() {
 
     //! necesita resestructuración para usar la función discard
     // pero funciona
+    
     // se quitan las cartas vendidas de la mano
     gameState.players[gameState.turn].hand = gameState.players[gameState.turn].hand.filter(c => !selectedCards.has(c));
     // se suman las monedas

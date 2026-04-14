@@ -37,7 +37,7 @@ export function buildDeck(){
                 newCard.pieces = [char];
                 newCard.name = 'TROZO DE MAPA';
                 newCard.symbol = 'I';
-                newCard.sprite = '' //TODO pendiente
+                newCard.sprite = '' //¿ pendiente
 
                 basicCards.push(newCard);
             }
@@ -65,7 +65,7 @@ export function buildDeck(){
                 newCard.pieces = combination;
                 newCard.name = 'TROZO DE MAPA';
                 newCard.symbol = 'II';
-                newCard.sprite = '' //TODO pendiente
+                newCard.sprite = '' //¿ pendiente
 
                 basicCards.push(newCard);
             }
@@ -92,7 +92,7 @@ export function buildDeck(){
             newCard.pieces = combination;
             newCard.name = 'TROZO DE MAPA';
             newCard.symbol = 'III';
-            newCard.sprite = '' //TODO pendiente
+            newCard.sprite = '' //¿ pendiente
 
             basicCards.push(newCard);
         }
@@ -106,18 +106,18 @@ export function buildDeck(){
             newCard.pieces = null;
             newCard.name = 'PISTA';
             newCard.symbol = 'P';
-            newCard.sprite = '' //TODO pendiente
+            newCard.sprite = '' //¿ pendiente
 
             basicCards.push(newCard);
         }
     }
 
     function buildSpecialDeck() {
-        specialCards.push({id: cardId++, type: "RELIQUIA", price: 3, pieces: null, name: "CUCHARA", symbol: "V", sprite: ''});
-        specialCards.push({id: cardId++, type: "RELIQUIA", price: 4, pieces: null, name: "ANILLO", symbol: "V", sprite: ''});
-        specialCards.push({id: cardId++, type: "RELIQUIA", price: 5, pieces: null, name: "CÁLIZ", symbol: "V", sprite: ''});
-        specialCards.push({id: cardId++, type: "RELIQUIA", price: 6, pieces: null, name: "ARPA", symbol: "V", sprite: ''});
-        specialCards.push({id: cardId++, type: "RELIQUIA", price: 7, pieces: null, name: "DIAMANTE", symbol: "V", sprite: ''});
+        specialCards.push({id: cardId++, type: "RELIQUIA", price: 3, pieces: null, name: "CUCHARA", symbol: "R", sprite: ''});
+        specialCards.push({id: cardId++, type: "RELIQUIA", price: 4, pieces: null, name: "ANILLO", symbol: "R", sprite: ''});
+        specialCards.push({id: cardId++, type: "RELIQUIA", price: 5, pieces: null, name: "CÁLIZ", symbol: "R", sprite: ''});
+        specialCards.push({id: cardId++, type: "RELIQUIA", price: 6, pieces: null, name: "ARPA", symbol: "R", sprite: ''});
+        specialCards.push({id: cardId++, type: "RELIQUIA", price: 7, pieces: null, name: "DIAMANTE", symbol: "R", sprite: ''});
         
         specialCards.push({
             id: cardId++,
@@ -135,11 +135,11 @@ export function buildDeck(){
             price: 7,
             pieces: ["B", "C", "E", "F", "H", "I", "J"],
             name: "COPIA INCOMPLETA",
-            symbol: "C",
+            symbol: "VII",
             sprite: ''
         });
 
-        specialCards.push({id: cardId++, type: "PAPEL", price: 2, pieces: null, name: "PAPEL MÁGICO", symbol: "P", sprite: ''});
+        specialCards.push({id: cardId++, type: "PAPEL", price: 2, pieces: null, name: "PAPEL MÁGICO", symbol: "M", sprite: ''});
         specialCards.push({id: cardId++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
         specialCards.push({id: cardId++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
         specialCards.push({id: cardId++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});

@@ -9,14 +9,14 @@
 </head>
 <body>
 
-    <!-- =========================================
-         HTML STRUCTURE
-         ========================================= -->
     <div class="game-wrapper">
         
+        <!-- ventanas emergentes -->
         <div id="notifications-container"></div>
+        <div id="big-notifications-container"></div>
         <div id="trick-player-selector-container"></div>
 
+        <!-- header info -->
         <header>
             <div class="game-status">
                 Ronda: <span id="current-round-display" class="highlight">Cargando...</span> |
@@ -38,11 +38,13 @@
             <!-- centro -->
             <main class="game-board">
                 <div class="center-play-area">
+                    <!-- baraja -->
                     <div class="card-pile deck-pile" id="deck-element">
                         <span style="font-size: 2.5rem; color: #D4AF37; text-shadow: 2px 2px 4px black;">☠️</span>
                         <div style="margin-top: 5px;"><span id="deck-count">0</span> cartas</div>
                         <div class="pile-label">Mazo</div>
                     </div>
+                    <!-- tienda -->
                     <div class="card-pile discard-pile empty" id="discard-element">
                         <div id="clue-counter" class="pile-label" style="top: -30px;">Pistas: 0</div>
                         <div id="discard-content">Vacío</div>
@@ -51,6 +53,7 @@
                     </div>
                 </div>
 
+                <!-- botones de acción -->
                 <div class="action-bar" id="action-buttons">
                     <button class="action-btn" data-action="explore">Explorar</button>
                     <button class="action-btn" data-action="trick">Embaucar</button>
@@ -65,12 +68,13 @@
         <!-- zona de la mano -->
         <footer class="hand-area">
             <div class="hand-header">
+                <!-- header mano (monedas y cartas) -->
                 <div class="hand-header-info">
                     <span id="my-card-count">Cartas en mano: <strong class="highlight">0</strong></span>
                     <span>Tus Doblones: <strong class="highlight" id="my-coins">0</strong> 🟡</span>
                 </div>
+                <!-- contador de piezas -->
                 <div class="hand-header-pieces-count" id="hand-header-pieces-count">
-                    
                     <div class="owned-piece">A</div>
                     <div class="owned-piece active">B</div>
                     <div class="owned-piece">C</div>
@@ -82,10 +86,9 @@
                     <div class="owned-piece">I</div>
                     <div class="owned-piece">J</div>
                 </div>
-                
             </div>
+            <!-- mano -->
             <div class="hand-cards" id="hand-container">
-                <!-- mano inyectada por JS -->
             </div>
         </footer>
     </div>

@@ -7,6 +7,7 @@ import { autoPassTurn } from "./turn.js";
 export function trick(player=null) {
     if (player == null) return openPlayerSelector();
 
+    gameState.players[gameState.turn].coins -= 1;
     // le roba una carta al azar de la mano a otro jugador
     const stolenCard = player.hand[Math.floor(Math.random() * player.hand.length)];
     gameState.players[gameState.turn].hand.push(stolenCard);
@@ -14,7 +15,7 @@ export function trick(player=null) {
 
     elements.trickPlayerSelectorContainer.innerHTML = '';
     elements.trickPlayerSelectorContainer.className = 'trick-player-selector';
-    showNotification(`Un tonto más a la lista.`);
+    showNotification(`Si los tontos volaran no veríamos el sol.`);
     showNotification(`Embaucaste a ${player.name} y le robaste: ${parceCard(stolenCard)}`);
     gameState.turnState = 'paused';
     renderGameState(gameState);
@@ -23,8 +24,7 @@ export function trick(player=null) {
 
 function openPlayerSelector() {
     elements.trickPlayerSelectorContainer.innerHTML = '';
-    elements.trickPlayerSelectorContainer.className = 'trick-player-selector active'
-
+    elements.trickPlayerSelectorContainer.className = 'trick-player-selector active';
 
     gameState.players.forEach(player => {
         if (player !== gameState.players[gameState.turn] && player.hand.length > 0) {
@@ -43,6 +43,7 @@ function openPlayerSelector() {
             elements.trickPlayerSelectorContainer.appendChild(playerDiv);
         }
     });
+    
     const closeBtn = document.createElement('div');
     closeBtn.innerHTML += `
         <div class="trick-player-selector-close">Volver</div>

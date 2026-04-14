@@ -9,7 +9,8 @@ import { mill } from './game-logic/basic-actions.js';
 window.addEventListener('DOMContentLoaded', () => {
     initGame();
     // millALot(); //! borrar después
-    // addToHand(); //! borrar después
+    // addFullMapToHand(); //! borrar después
+    addBanditsToTop(); //! borrar después
     renderGameState(gameState);
     initActionEvents();
     setTimeout(() => showNotification("¡La partida comienza! Eres Barbanegra."), 500);
@@ -24,7 +25,7 @@ window.addEventListener('resize', () => {
 function millALot(howMany = 10){
     mill(howMany);
 }
-function addToHand() {
+function addFullMapToHand() {
     gameState.players[gameState.turn].hand.push({
         id: 999,
         type: "MAPA",
@@ -34,4 +35,9 @@ function addToHand() {
         symbol: "X",
         sprite: ''
     });
+}
+function addBanditsToTop() {
+    gameState.deck.currentDeck.unshift({id: 1000, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
+    // gameState.deck.currentDeck.unshift({id: 1001, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
+    // gameState.deck.currentDeck.unshift({id: 1002, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
 }

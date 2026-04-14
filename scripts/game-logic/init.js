@@ -27,5 +27,8 @@ function setPlayers() {
         { id: "p2", name: "Player 2", hand: [], coins: 10 },
         { id: "p3", name: "Player 3", hand: [], coins: 10 },
         { id: "p4", name: "Player 4", hand: [], coins: 10 },
+        { id: "p5", name: "Player 5", hand: [], coins: 10 },
+        { id: "p6", name: "Player 6", hand: [], coins: 10 },
+        { id: "p7", name: "Player 7", hand: [], coins: 10 },
     ]
 }
