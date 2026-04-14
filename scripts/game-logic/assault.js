@@ -23,6 +23,8 @@ export function assaultAsCounter(banditCard, currentPlayerTurn, trickedPlayerTur
         if (typeof stolenItems !== 'number') gameState.players[trickedPlayerTurn].hand.push(...stolenItems);
         if (typeof stolenItems === 'number') gameState.players[trickedPlayerTurn].coins += stolenItems;
     }
+    gameState.discard.push(banditCard);
+    gameState.players[trickedPlayerTurn].hand = gameState.players[trickedPlayerTurn].hand.filter(card => card.id != banditCard.id)
     // revolver todo
     shuffleAll();
     // notificar

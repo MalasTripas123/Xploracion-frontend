@@ -44,9 +44,10 @@ function addRandomBanditToTop() {
     if (randomNumber === 2) gameState.deck.currentDeck.unshift({id: 1001, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
     if (randomNumber === 3) gameState.deck.currentDeck.unshift({id: 1002, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
 }
+let idCount = 0;
 function addRandomBanditToHand(player) {
     const randomNumber = Math.floor(Math.random() * 3) + 1;
-    if (randomNumber === 1) player.hand.push({id: 1000, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
-    if (randomNumber === 2) player.hand.push({id: 1001, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
-    if (randomNumber === 3) player.hand.push({id: 1002, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
+    if (randomNumber === 1) player.hand.push({id: 1000+idCount++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
+    if (randomNumber === 2) player.hand.push({id: 1001+idCount++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
+    if (randomNumber === 3) player.hand.push({id: 1002+idCount++, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
 }
