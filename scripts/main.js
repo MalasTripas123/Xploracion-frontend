@@ -37,7 +37,8 @@ function addFullMapToHand() {
     });
 }
 function addBanditsToTop() {
-    gameState.deck.currentDeck.unshift({id: 1000, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
-    // gameState.deck.currentDeck.unshift({id: 1001, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
-    // gameState.deck.currentDeck.unshift({id: 1002, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber === 1) gameState.deck.currentDeck.unshift({id: 1000, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO MEDIA MANO", symbol: "B", sprite: ''});
+    if (randomNumber === 2) gameState.deck.currentDeck.unshift({id: 1001, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO SELECTIVO", symbol: "B", sprite: ''});
+    if (randomNumber === 3) gameState.deck.currentDeck.unshift({id: 1002, type: "BANDIDO", price: 0, pieces: null, name: "BANDIDO CODICIOSO", symbol: "B", sprite: ''});
 }
