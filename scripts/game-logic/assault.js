@@ -3,15 +3,31 @@ import { banditNotification } from "../ui/notif.js";
 import { shuffle, shuffleAll } from "./deck.js";
 
 export function assaultOnExplore(banditCard, assaultedPlayer) {
-    const stolenCards = getStolenCards(banditCard, assaultedPlayer);
+    const stolenItems = getStolenCards(banditCard, assaultedPlayer);
     // enviar al descarte
-    if (stolenCards) {
-        if (typeof stolenCards !== 'number') gameState.discard.push(...stolenCards);
+    if (stolenItems) {
+        if (typeof stolenItems !== 'number') gameState.discard.push(...stolenItems);
     }
     // revolver todo
     shuffleAll();
     // notificar
-    banditNotification(banditCard, stolenCards, stolenCards);
+    banditNotification(banditCard, stolenItems, stolenItems);
+    // pasar turno
+}
+
+export function assaultAsCounter(banditCard, currentPlayerTurn, trickedPlayerTurn) {
+    console.log(gameState.players[currentPlayerTurn]);
+    const stolenItems = getStolenCards(banditCard, currentPlayerTurn);
+    // enviar al jugador que respondió
+    if (stolenItems) {
+        if (typeof stolenItems !== 'number') gameState.players[trickedPlayerTurn].hand.push(...stolenItems);
+        if (typeof stolenItems === 'number') gameState.players[trickedPlayerTurn].coins += stolenItems;
+    }
+    // revolver todo
+    shuffleAll();
+    // notificar
+    banditNotification(banditCard, stolenItems, stolenItems);
+    // pasar turno
 }
 
 function getStolenCards(banditCard, assaultedPlayer) {
@@ -36,15 +52,15 @@ function halfHand(assaultedPlayer) {
     return stolenCards;
 }
 
-function selective(assaultedPlayer) {
-    if (gameState.players[assaultedPlayer].hand.length < 1) return null;
+function selective(assaultedPlayerIndex) {
+    if (gameState.players[assaultedPlayerIndex].hand.length < 1) return null;
     // prioridad de cartas
     const priority = ["MAPA", "COPIA", "RELIQUIA", "TROZO03", "TROZO02", "TROZO01", "PAPEL", "PISTA", "BANDIDO"];
     // aplica la prioridad
     let chosenType = null;
 
     for (const type of priority) {
-        for (const card of gameState.players[assaultedPlayer].hand) {
+        for (const card of gameState.players[assaultedPlayerIndex].hand) {
             if (card.type === type) {
                 chosenType = type;
                 break;
@@ -53,16 +69,15 @@ function selective(assaultedPlayer) {
         if (chosenType) break;
     }
     // roba las cartas más valiosas
-    const hand = gameState.players[assaultedPlayer].hand;
+    const hand = gameState.players[assaultedPlayerIndex].hand;
     const stolenCards = hand.filter(card => card.type === chosenType);
 
-    gameState.players[assaultedPlayer].hand = hand.filter(card => card.type !== chosenType);
+    gameState.players[assaultedPlayerIndex].hand = hand.filter(card => card.type !== chosenType);
 
     return stolenCards;
 }
 
 function greedy(assaultedPlayer) {
-    
     const stolenCoins = Math.ceil(gameState.players[assaultedPlayer].coins / 2);
     gameState.players[assaultedPlayer].coins -= stolenCoins;
     return stolenCoins;

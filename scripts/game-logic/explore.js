@@ -4,6 +4,7 @@ import { renderGameState } from '../ui.js';
 import { draw } from './basic-actions.js';
 import { parceCard } from './parce-card.js';
 import { assaultOnExplore } from './assault.js';
+import { autoPassTurn } from './turn.js';
 
 export function explore() {
     const currentPlayer = gameState.players[gameState.turn];
@@ -19,8 +20,8 @@ export function explore() {
 
         if (drawnCard[0].type === 'BANDIDO') {
             assaultOnExplore(drawnCard[0], gameState.turn);
-            
             gameState.turnState = 'paused';
+            if (gameState.turnState === 'paused') autoPassTurn(10);
         } else {
             elements.discardElement.classList.add('alert');
             setTimeout(() => {
