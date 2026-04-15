@@ -1,6 +1,8 @@
 import { gameState } from "../state.js";
 import { banditNotification } from "../ui/notif.js";
 import { shuffle, shuffleAll } from "./deck.js";
+import { autoPassTurn, passTurn } from "./turn.js";
+import { hasWon } from "./win-lose-condition.js";
 
 export function assaultOnExplore(banditCard, assaultedPlayer) {
     const stolenItems = getStolenCards(banditCard, assaultedPlayer);
@@ -29,7 +31,10 @@ export function assaultAsCounter(banditCard, currentPlayerTurn, trickedPlayerTur
     shuffleAll();
     // notificar
     banditNotification(banditCard, stolenItems, stolenItems);
+    //
+    hasWon(gameState.players[trickedPlayerTurn]);
     // pasar turno
+    if (gameState.turnState === 'paused') autoPassTurn(10);
 }
 
 function getStolenCards(banditCard, assaultedPlayer) {

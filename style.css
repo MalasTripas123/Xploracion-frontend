@@ -248,6 +248,12 @@ header {
     box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
+.player-card.defeated {
+    background-color: #16222E;
+    border-color:#16222E;
+    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
 .player-name {
     font-weight: bold;
     margin-bottom: 8px;

@@ -1,3 +1,5 @@
+import { initActionEvents } from '../game-logic/actions.js';
+import { initGame } from '../game-logic/init.js';
 import { getPiecesParced } from '../game-logic/parce-card.js';
 import { counterResponseAction } from '../game-logic/trick.js';
 import { elements, gameState } from '../state.js';
@@ -134,4 +136,69 @@ export function trickedNotification(trickedPlayerTurn, availableBandits, current
     });
     elements.bigNotifications.appendChild(closeBtn);
 
+}
+
+export function winNotification() {
+    elements.bigNotifications.innerHTML = '';
+    elements.bigNotifications.className = 'big-notifications-container active';
+
+    const title = document.createElement('div');
+    title.innerHTML += `
+        <div class="big-notifications-title" style="top: 5px;">HAZ GANADO LA PARTIDA</div>
+    `;
+    elements.bigNotifications.appendChild(title);
+
+    const closeBtn = document.createElement('div');
+    closeBtn.innerHTML += `
+        <div class="trick-player-selector-close">Reiniciar</div>
+    `;
+    closeBtn.addEventListener('click', () => {
+        elements.bigNotifications.innerHTML = '';
+        elements.bigNotifications.className = 'trick-player-selector';
+
+        gameState.currentRound = 0;
+        gameState.turn = 0,
+        gameState.totalTurns = 0,
+        gameState.myPlayerId = "p1",
+        gameState.deck = {
+            basicDeck: [],
+            specialDeck: [],
+            currentDeck: [],
+        },
+        gameState.discard = [],
+        gameState.soldClues = [],
+        gameState.players = [],
+        gameState.turnState = 'initial',
+        initGame();
+        renderGameState(gameState);
+        initActionEvents();
+        setTimeout(() => showNotification(`¡La partida comienza! Eres ${gameState.players[gameState.turn].name}.`), 500);
+    });
+    elements.bigNotifications.appendChild(closeBtn);
+}
+
+export function looseNotification() {
+    elements.bigNotifications.innerHTML = '';
+    elements.bigNotifications.className = 'big-notifications-container active';
+
+    const title = document.createElement('div');
+    title.innerHTML += `
+        <div class="big-notifications-title" style="top: 5px;">Haz perdido por pasar el turno sin monedas</div>
+    `;
+    elements.bigNotifications.appendChild(title);
+
+    const closeBtn = document.createElement('div');
+    closeBtn.innerHTML += `
+        <div class="trick-player-selector-close">Ok</div>
+    `;
+    closeBtn.addEventListener('click', () => {
+        gameState.turn = (gameState.turn + 1) % gameState.players.length;
+        gameState.currentRound += gameState.turn === 0 ? 1 : 0;
+        gameState.totalTurns++;
+
+        gameState.currentPlayerId = gameState.players[gameState.turn].id;
+        gameState.turnState = 'initial';
+        renderGameState(gameState);
+    });
+    elements.bigNotifications.appendChild(closeBtn);
 }

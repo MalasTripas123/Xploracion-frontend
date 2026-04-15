@@ -3,6 +3,9 @@ import { getPiecesParced } from '../game-logic/parce-card.js';
 import { toggleButtons } from '../ui.js';
 
 export function updateHand(cards) {
+
+    cards.sort((a, b) => a.id - b.id);
+
     elements.handContainer.innerHTML = ''; 
     elements.myCardCount.innerHTML = `Cartas en mano: <strong class="highlight">${cards.length}</strong>`;
     elements.myCoins.textContent = gameState.players[gameState.turn].coins;
@@ -74,6 +77,11 @@ export function updateHand(cards) {
     elements.piecesCountContainer.innerHTML = 'Tozos de mapa obtenidos:' + ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(piece => `
         <div class="owned-piece ${activePieces.includes(piece) ? 'active' : ''}">${piece}</div>`
     ).join('');
+    let hasMagicPaper = false;
+    gameState.players[gameState.turn].hand.map(card => {
+        if (card.type === 'PAPEL') hasMagicPaper = true;
+    });
+    elements.piecesCountContainer.innerHTML += `<div class="owned-piece ${hasMagicPaper ? 'active' : ''}">PM</div>`
 }
 
 function handleCardClick(card, element, cardsInDOM) {

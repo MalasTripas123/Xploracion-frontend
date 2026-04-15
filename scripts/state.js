@@ -11,7 +11,7 @@ export let gameState = {
     discard: [],
     soldClues: [],
     players: [],
-    turnState: 'initial', // initial: permite todas las acciones - explored: bloquea la excavación - paused: bloquea todas las acciones
+    turnState: 'initial', // initial: permite todas las acciones - explored: bloquea la excavación - paused: bloquea todas las acciones - stoped: el juego se ha detenido porque alguien ganó
 };
 
 export let selectedCards = new Set();

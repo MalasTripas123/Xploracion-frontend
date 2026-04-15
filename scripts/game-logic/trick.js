@@ -4,10 +4,12 @@ import { showNotification, trickedNotification } from "../ui/notif.js";
 import { assaultAsCounter } from "./assault.js";
 import { parceCard } from "./parce-card.js";
 import { autoPassTurn } from "./turn.js";
+import { hasWon } from "./win-lose-condition.js";
 
 export function trick(trickedPlayer=null) {
+    if (gameState.players[gameState.turn].coins < 1) return showNotification("Monedas insuficientes!");
     if (trickedPlayer == null) return openPlayerSelector();
-
+    
     gameState.players[gameState.turn].coins -= 1;
     // elige una carta al azar de la mano a otro jugador
     const pickedCard = trickedPlayer.hand[Math.floor(Math.random() * trickedPlayer.hand.length)];
@@ -54,6 +56,7 @@ function stealCard(trickedPlayer, stolenCard) {
         showNotification(`Embaucaste a ${trickedPlayer.name} y le robaste: ${parceCard(stolenCard)}`);
         gameState.turnState = 'paused';
         renderGameState(gameState);
+        hasWon(gameState.players[gameState.turn]);
         if (gameState.turnState === 'paused') autoPassTurn(10);
 }
 
@@ -70,7 +73,7 @@ function openPlayerSelector() {
     elements.trickPlayerSelectorContainer.className = 'trick-player-selector active';
 
     gameState.players.forEach(player => {
-        if (player !== gameState.players[gameState.turn] && player.hand.length > 0) {
+        if (player !== gameState.players[gameState.turn] && player.hand.length > 0 && player.state === 'alive') {
             const playerDiv = document.createElement('div');
             playerDiv.className = 'player-to-trick';
             playerDiv.innerHTML = `

@@ -54,11 +54,11 @@ export function toggleButtons() {
                 'Selecciona un botín';
 
     elements.actionButtons.innerHTML = `
-        <button class="${state === 'paused' ? 'blocked-btn' : 'action-btn'}" data-action="explore">Explorar <span class="action-value">1</span></button>
-        <button class="${state === 'paused' ? 'blocked-btn' : 'action-btn'}" data-action="trick">Embaucar <span class="action-value">1</span></button>
-        <button class="${state === 'paused' ? 'blocked-btn' : emptyDiscard ? 'blocked-btn' : 'action-btn'}" data-action="buy">${emptyDiscard ? 'Tienda vacía' : `Comprar <span class="action-value">${precioDescarte}</span>`}</button>
-        <button class="${state === 'paused' ? 'blocked-btn' : sellActive ? 'action-btn' : 'blocked-btn'}" data-action="sell">${textInSellButton}</button>
-        <button class="${state === 'paused' || state === 'explored' ? 'blocked-btn' : 'action-btn'}" data-action="dig">Excavar <span class="action-value">2</span></button>
-        <button class="${'action-btn primary'}" data-action="pass">Pasar Turno</button>
+        <button class="${state === 'paused' || state === 'stoped' ? 'blocked-btn' : 'action-btn'}" data-action="explore">Explorar <span class="action-value">1</span></button>
+        <button class="${state === 'paused' || state === 'stoped' ? 'blocked-btn' : 'action-btn'}" data-action="trick">Embaucar <span class="action-value">1</span></button>
+        <button class="${state === 'paused' || state === 'stoped' ? 'blocked-btn' : emptyDiscard ? 'blocked-btn' : 'action-btn'}" data-action="buy">${emptyDiscard ? 'Tienda vacía' : `Comprar <span class="action-value">${precioDescarte}</span>`}</button>
+        <button class="${state === 'paused' || state === 'stoped' ? 'blocked-btn' : sellActive ? 'action-btn' : 'blocked-btn'}" data-action="sell">${textInSellButton}</button>
+        <button class="${state === 'paused' || state === 'explored' || state === 'stoped' ? 'blocked-btn' : 'action-btn'}" data-action="dig">Excavar <span class="action-value">2</span></button>
+        <button class="${state === 'stoped' ? 'blocked-btn' : 'action-btn primary'}" data-action="pass">Pasar Turno</button>
     `;
 }

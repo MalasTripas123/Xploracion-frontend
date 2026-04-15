@@ -5,6 +5,7 @@ import { dig } from './dig.js';
 import { sell } from './sell.js';
 import { passTurn, autoPassTurn } from './turn.js';
 import { trick } from './trick.js';
+import { hasWon } from './win-lose-condition.js';
 
 
 export function initActionEvents() {
@@ -18,29 +19,34 @@ export function initActionEvents() {
 function handleAction(action) {
     const actionsMap = {
         'explore': () => {
-            if (gameState.turnState === 'paused') return;
+            if (['paused', 'stoped'].includes(gameState.turnState)) return;
             explore();
+            hasWon(gameState.players[gameState.turn]);
         },
         'trick': () => {
-            if (gameState.turnState === 'paused') return;
+            if (['paused', 'stoped'].includes(gameState.turnState)) return;
             trick();
         },
         'buy': () => {
-            if (gameState.turnState === 'paused') return;
+            if (['paused', 'stoped'].includes(gameState.turnState)) return;
             buy();
+            hasWon(gameState.players[gameState.turn]);
             if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'sell': () => {
-            if (gameState.turnState === 'paused') return;
+            if (['paused', 'stoped'].includes(gameState.turnState)) return;
             sell();
+            hasWon(gameState.players[gameState.turn]);
             if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'dig': () => {
-            if (gameState.turnState === 'paused') return;
+            if (['paused', 'stoped'].includes(gameState.turnState)) return;
             dig();
+            hasWon(gameState.players[gameState.turn]);
             if (gameState.turnState === 'paused') autoPassTurn(10);
         },
         'pass': () => {
+            if (['stoped'].includes(gameState.turnState)) return;
             passTurn();
         }
     };
